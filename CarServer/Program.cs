@@ -29,6 +29,7 @@ builder.Services.AddControllers()
     })
     .AddOData(opt => opt.Count().Filter().Expand().Select().OrderBy().SetMaxTop(100));
 
+builder.Services.AddScoped<IcarService, CarService>();
 //config cors
 builder.Services.AddCors(options =>
        {
