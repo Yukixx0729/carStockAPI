@@ -42,6 +42,27 @@ namespace CarServer.Controllers
             return Ok(cars);
         }
 
+        //get car by id
+        [HttpGet("id/{id}")]
+        public async Task<ActionResult<CarDto>> GetCar(Guid id)
+        {
+            var user = await GetSignedInUserAsync();
+            var existingcar = await _carService.GetCarByIdAsync(id);
+            if (user.Id == existingcar.DealerId)
+            {
+                try
+                {
+                    var car = await _carService.GetCarByIdAsync(id);
+                    return Ok(car);
+                }
+                catch (ArgumentException)
+                {
+                    return NotFound();
+                }
+            }
+            return Forbid("You are not authorized to view this car.");
+        }
+
         //get all the listing cars under the dealer id
         [HttpGet("dealer")]
         public async Task<ActionResult<IEnumerable<Car>>> GetCarsById()
@@ -93,5 +114,37 @@ namespace CarServer.Controllers
             }
 
         }
+
+        //update car info
+        [HttpPut("id/{id}")]
+        public async Task<IActionResult> PutCar(Guid id, NewCar car)
+        {
+            var user = await GetSignedInUserAsync();
+            var existingcar = await _carService.GetCarByIdAsync(id);
+
+            if (user.Id == existingcar.DealerId)
+            {
+                var success = await _carService.UpdateCarAsync(id, car);
+                if (success) return NoContent();
+                return BadRequest("Invalid information");
+            }
+            return Forbid("You are not authorized to update this car.");
+        }
+
+        //delete the car
+        [HttpDelete("id/{id}")]
+        public async Task<IActionResult> DeleteCar(Guid id)
+        {
+            var user = await GetSignedInUserAsync();
+            var existingcar = await _carService.GetCarByIdAsync(id);
+            if (user.Id == existingcar.DealerId)
+            {
+                var success = await _carService.DeleteCarAsync(id);
+                if (success) return NoContent();
+                return BadRequest("Invalid information");
+            }
+            return Forbid("You are not authorized to update this car.");
+        }
+
     }
 }

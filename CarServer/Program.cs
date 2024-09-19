@@ -21,6 +21,12 @@ builder.Services.AddAuthorization();
 //config identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders().AddApiEndpoints();
 
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+    });
 
 builder.Services.AddScoped<IcarService, CarService>();
 //config cors
