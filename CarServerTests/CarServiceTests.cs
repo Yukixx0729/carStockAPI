@@ -16,10 +16,9 @@ namespace CarServerTests
         public CarServiceTests()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()) // Use a unique name for each test
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
 
-            // Create a mock ApplicationDbContext
             _context = new ApplicationDbContext(options);
 
             _service = new CarService(_context);
