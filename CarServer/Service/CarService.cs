@@ -1,12 +1,10 @@
 using CarServer.Data;
-using Microsoft.AspNetCore.OData.Query;
 using Microsoft.EntityFrameworkCore;
 using CarServer.Models;
 using CarServer.Models.Entities;
 
 public interface IcarService
 {
-    Task<IEnumerable<Car>> GetAllCarsAsync();
     Task<Car> CreateCarAsync(NewCar car, ApplicationUser user);
     Task<CarDto> GetCarByIdAsync(Guid id);
     Task<IEnumerable<CarDto>> GetAllCarsByDealerIdAsync(string id);
@@ -23,11 +21,6 @@ public class CarService : IcarService
     {
         _context = context;
 
-    }
-
-    public async Task<IEnumerable<Car>> GetAllCarsAsync()
-    {
-        return await _context.Cars.ToListAsync();
     }
 
     public async Task<Car> CreateCarAsync(NewCar car, ApplicationUser user)

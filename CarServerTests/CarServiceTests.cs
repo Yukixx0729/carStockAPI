@@ -48,19 +48,6 @@ namespace CarServerTests
 
         //tests
         [Fact]
-        public async Task GetAllCarsAsync_ReturnCars()
-        {
-            await InsertDataAsync();
-
-            var results = await _service.GetAllCarsAsync();
-
-            Assert.Equal(3, results.Count());
-            Assert.Contains(results, c => c.Model == "Tiguan");
-            Assert.Contains(results, c => c.Model == "Golf");
-            Assert.Contains(results, c => c.Model == "Accord");
-        }
-
-        [Fact]
         public async Task CreateCarAsync_RetuenCar()
         {
             await InsertDataAsync();
@@ -78,8 +65,10 @@ namespace CarServerTests
             var createdCar = await _service.CreateCarAsync(newCar, user);
             Assert.Equal("Yaris", createdCar.Model);
 
-            var cars = await _service.GetAllCarsAsync();
-            Assert.Equal(4, cars.Count());
+            var cars = await _service.GetAllCarsByDealerIdAsync("2");
+
+            Assert.Equal(3, cars.Count());
+
         }
 
 
@@ -131,8 +120,8 @@ namespace CarServerTests
 
             Assert.True(result);
 
-            var cars = await _service.GetAllCarsAsync();
-            Assert.Equal(2, cars.Count());
+            var deletedCar = await _context.Cars.FindAsync(Guid.Parse("9f1c6bc3-3e90-4f58-9f68-8fb91a4f34b1"));
+            Assert.Null(deletedCar);
 
         }
 

@@ -34,14 +34,6 @@ namespace CarServer.Controllers
             return user;
         }
 
-        //get all the listing cars 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Car>>> GetCars()
-        {
-            var cars = await _carService.GetAllCarsAsync();
-            return Ok(cars);
-        }
-
         //get car by id
         [HttpGet("id/{id}")]
         public async Task<ActionResult<CarDto>> GetCar(Guid id)
@@ -60,7 +52,7 @@ namespace CarServer.Controllers
                     return NotFound();
                 }
             }
-            return Forbid("You are not authorized to view this car.");
+            return Unauthorized("You are not authorized to view this car.");
         }
 
         //get all the listing cars under the dealer id
@@ -128,7 +120,7 @@ namespace CarServer.Controllers
                 if (success) return NoContent();
                 return BadRequest("Invalid information");
             }
-            return Forbid("You are not authorized to update this car.");
+            return Unauthorized("You are not authorized to update this car.");
         }
 
         //delete the car
@@ -143,7 +135,7 @@ namespace CarServer.Controllers
                 if (success) return NoContent();
                 return BadRequest("Invalid information");
             }
-            return Forbid("You are not authorized to update this car.");
+            return Unauthorized("You are not authorized to delete this car.");
         }
 
     }
