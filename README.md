@@ -27,7 +27,8 @@
 - Run `dotnet restore` to download and install all necessary NuGet packages
 - As the api is running using sql server, run `touch appsettings.json`
 - Copy the information and change your database connection string with your own information
-- ```{
+- ```
+  {
     "Logging": {
       "LogLevel": {
         "Default": "Information",
