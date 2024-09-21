@@ -25,7 +25,7 @@
 
 - After cloning the repo to local environment, `cd CarServer`
 - Run `dotnet restore` to download and install all necessary NuGet packages
-- As the api is running using sql server, run `touch appsettings.json`
+- As the api is running using sql server, run `touch appsettings.json` (macOS/Linux) , run `New-Item appsettings.json -Type File` (window)
 - Copy the information and change your database connection string with your own information
 - ```
   {
