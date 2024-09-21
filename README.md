@@ -43,6 +43,7 @@
   ```
 
 - Run `dotnet ef database update` to apply migration
+- Run `dotnet build` to ensure everything is configured correctly
 - Run `dotnet watch run` to test the API
 
 - Register dealer `/register`
