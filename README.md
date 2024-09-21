@@ -11,21 +11,21 @@
 
 ---
 
-- `/register` signing up new dealer
-- `/login` login for logging in a dealer
+- `/register` sign up new dealer
+- `/login` login a dealer
 - `/logout` logout the current dealer
 
-- `/api/Cars(post)` creating a new car
-- `/api/Cars/id/{id}(get)` displaying the car by id
-- `/api/Cars/id/{id}(put)` updating the car by id
-- `/api/Cars/dealer` listing all the cars under the login dealer
-- `/api/Cars/filter` listing all the cars under the login dealer and certain filters
+- `/api/Cars(post)` create a new car
+- `/api/Cars/id/{id}(get)` display the car information by id
+- `/api/Cars/id/{id}(put)` update the car by id
+- `/api/Cars/dealer` list all the cars under the login dealer
+- `/api/Cars/filter` list all the cars under the login dealer with certain filters
 
-### **Steps for cloning**
+### **Steps for local environment**
 
 - After cloning the repo to local environment, `cd CarServer`
 - Run `dotnet restore` to download and install all necessary NuGet packages
-- As the api is running using sql server, `touch appsettings.json`
+- As the api is running using sql server, run `touch appsettings.json`
 - Copy the information and change your database connection string with your own information
 - ```{
     "Logging": {
